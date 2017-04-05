@@ -1,10 +1,6 @@
 package com.ucbcba.taller.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 import static sun.rmi.transport.TransportConstants.Version;
@@ -21,6 +17,11 @@ public class Product {
 
     @Version
     private Integer version;
+
+
+    @ManyToOne
+    @JoinColumn(name="product_category_id")
+    private ProductCategory productCategory;
 
     private String productId;
     private String name;
@@ -66,4 +67,12 @@ public class Product {
         this.price = price;
     }
 
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public String getProductCategoryName() {
+        return productCategory == null ? "" : productCategory.getName();
+    }
 }
