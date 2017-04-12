@@ -1,6 +1,8 @@
 package com.ucbcba.taller.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 import static sun.rmi.transport.TransportConstants.Version;
@@ -24,6 +26,8 @@ public class Product {
     private ProductCategory productCategory;
 
     private String productId;
+    @NotNull
+    @Size(min=2, max=30)
     private String name;
     private BigDecimal price;
 

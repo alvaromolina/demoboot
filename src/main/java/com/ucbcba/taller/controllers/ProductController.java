@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 /**
  * Product controller.
@@ -64,7 +67,12 @@ public class ProductController {
 
 
     @RequestMapping(value = "product", method = RequestMethod.POST)
-    public String saveProduct(Product product) {
+    public String saveProduct(@Valid Product product, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "productForm";
+        }
+
         productService.saveProduct(product);
         return "redirect:/product/" + product.getId();
     }

@@ -1,6 +1,7 @@
 package com.ucbcba.taller.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -17,6 +18,7 @@ public class ProductCategory {
     @OneToMany(mappedBy="productCategory", cascade = CascadeType.ALL)
     private Set<Product> products;
 
+    @NotNull
     private String name;
 
     public String getName() {
